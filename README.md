@@ -255,7 +255,7 @@ flowchart TD
 
     %% Data persistence paths
     H -->|Transactional Data| K[Azure SQL Database]
-    H -->|Analytics / Time-Series| L[Azure Data Explorer (ADX)]
+    H -->|Analytics / Time-Series| L[Azure Data Explorer ADX]
     H -->|Payload / Audit Storage| M[Azure Storage<br/>Blob / Table]
 
     %% Execution tracking
