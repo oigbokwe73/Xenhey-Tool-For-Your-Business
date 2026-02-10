@@ -233,15 +233,126 @@ That means consumers (Power BI, dashboards, admin portals, SRE tooling) don’t 
 
 ---
 
-## The “story” you can use to describe Xenhey to stakeholders
 
-> Xenhey is a workflow-driven Azure integration runtime delivered as a NuGet DLL. It provides plug-and-play connectors for Azure messaging, storage, and data platforms (Service Bus, Event Hubs, SQL, ADX, Storage) and exposes a uniform REST layer for execution and reporting. This lets teams build and operate integration workflows faster, with standardized security, telemetry, retries, auditing, and governance—without writing bespoke connector glue code for every system.
+### Xenhey Workflow – Rules-Driven, API-Secured
+
+```mermaid
+flowchart TD
+    A[Client / System / UI] -->|REST Call<br/>x-api-key| B[Xenhey REST API]
+
+    B --> C[API Gateway Layer<br/>Auth + Throttling]
+    C -->|Validate x-api-key| D[Workflow Runtime Engine]
+
+    D --> E[Load Workflow Definition]
+    E --> F[Load Rules JSON<br/>from Config / Storage / Key Vault]
+
+    F --> G[Rule Evaluation Engine]
+    G -->|Apply Routing & Validation Rules| H{Decision Point}
+
+    %% Messaging paths
+    H -->|Async Workflow| I[Azure Service Bus<br/>Queue / Topic]
+    H -->|Streaming Events| J[Azure Event Hub]
+
+    %% Data persistence paths
+    H -->|Transactional Data| K[Azure SQL Database]
+    H -->|Analytics / Time-Series| L[Azure Data Explorer (ADX)]
+    H -->|Payload / Audit Storage| M[Azure Storage<br/>Blob / Table]
+
+    %% Execution tracking
+    I --> N[Workflow Step Execution]
+    J --> N
+    K --> N
+    L --> N
+    M --> N
+
+    %% Observability
+    N --> O[Telemetry & Logging]
+    O --> P[Application Insights / OpenTelemetry]
+
+    %% Reporting
+    N --> Q[Persist Run Metadata<br/>Status, Duration, Errors]
+    Q --> R[Reporting API Layer]
+
+    R -->|REST Response| S[Admin UI / Power BI / Consumers]
+
+    %% Error handling
+    N -->|Failure| T[Retry / Dead-Letter / Compensation]
+    T --> Q
+```
 
 ---
 
-If you want, I can also produce:
+## What this diagram communicates (talk track)
 
-* a **Mermaid workflow diagram** showing HTTP → Workflow Engine → SB/EH/SQL/ADX/Storage → Reporting API
-* a **reference API contract** (OpenAPI-ish endpoints)
-* a **sample `appsettings.json`** connector + workflow configuration pattern
-* a **.NET minimal API skeleton** that hosts the Xenhey runtime and exposes the reporting endpoints
+### 1️⃣ Secure API entry
+
+* All workflow execution and reporting is exposed via **REST**
+* Every call is authenticated using an **`x-api-key`**
+* Optional throttling, IP allowlists, or RBAC can sit at the API layer
+
+---
+
+### 2️⃣ Rules are JSON-driven
+
+* Workflow behavior is **not hardcoded**
+* Rules are defined in **JSON** (routing, validation, thresholds, destinations)
+* Rules can be stored in:
+
+  * Azure Storage
+  * Azure SQL
+  * Azure App Config
+  * Azure Key Vault (secured)
+
+Example rule intent:
+
+* *“If eventType = Billing → send to Service Bus + SQL”*
+* *“If telemetry → Event Hub + ADX”*
+* *“If payload > 5MB → Blob Storage”*
+
+---
+
+### 3️⃣ Workflow runtime orchestration
+
+* Xenhey runtime evaluates rules
+* Determines:
+
+  * which Azure service to call
+  * sync vs async execution
+  * retry and failure behavior
+* Same runtime, different workflows — purely config-driven
+
+---
+
+### 4️⃣ Multi-target Azure integration
+
+From the same workflow execution:
+
+* **Service Bus** → business workflows
+* **Event Hub** → high-throughput streams
+* **Azure SQL** → operational data
+* **ADX** → analytics and observability
+* **Storage** → raw payloads and audit trails
+
+---
+
+### 5️⃣ Built-in observability and reporting
+
+* Every step emits:
+
+  * execution time
+  * success/failure
+  * correlation ID
+* Telemetry flows to App Insights / OpenTelemetry
+* Run metadata is persisted and exposed via **REST reporting APIs**
+* No direct DB or Kusto access needed for consumers
+
+---
+
+### 6️⃣ Failure handling is first-class
+
+* Retries, DLQs, and compensations are workflow-aware
+* Failures are still reported via REST
+* Enables replay and forensic analysis
+
+---
+
