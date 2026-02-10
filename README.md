@@ -1,5 +1,5 @@
 # Xenhey-Tool-For-Your-Business
-Here’s a clean, detailed way to explain **Xenhey** as a **workflow + process-driven integration tool** that ships a **runtime DLL via NuGet** and can connect to Azure services (Service Bus, Event Hubs, Azure SQL, ADX, Storage, etc.), while exposing everything through **REST-based reporting and operations**.
+**Xenhey** is a **workflow + process-driven integration tool** that ships a **runtime DLL via NuGet** and can connect to Azure services (Service Bus, Event Hubs, Azure SQL, ADX, Storage, etc.), while configuraiton of all rules uses **REST operations** for AI readiness.
 
 ---
 
@@ -37,7 +37,7 @@ Shipping Xenhey as a NuGet package means:
 The Xenhey runtime typically:
 
 1. Loads configuration (JSON/YAML/appsettings/Key Vault)
-2. Registers connectors (Service Bus, Event Hub, SQL, ADX, Storage, etc.)
+2. Registers connectors (Service Bus, Event Hub, SQL, ADX, Storage, Azure Document Search, All Openapi systems etc.)
 3. Wires cross-cutting concerns:
 
    * Managed Identity / service principal auth
@@ -70,8 +70,9 @@ A workflow is a named process made of steps such as:
   * schema enforcement
 * **Route step**
 
-  * based on rules (content-based routing)
+  * based on rules (x-api-key-based routing)
   * push to Service Bus topic, Event Hub, SQL, ADX, Storage
+  * The ability to extent via new conectors to more workflows
 * **Persist step**
 
   * SQL insert/merge
