@@ -1,4 +1,4 @@
-# Xenhey-Tool-For-Your-Business
+# Xenhey-Tooling-For-Your-Business
 **Xenhey** is a **workflow + process-driven integration tool** that ships a **runtime DLL via NuGet** and can connect to Azure services (Service Bus, Event Hubs, Azure SQL, ADX, Storage, etc.), while configuraiton of all rules uses **REST operations** for AI readiness.
 
 ---
