@@ -43,12 +43,6 @@ This is suitable for **enterprise decks, PRDs, GitHub README, or client proposal
 
 ---
 
-# 🔄 Before vs After: Azure Integrations
-
-### Direct Azure SDKs vs Workflow-Driven Connectors (Xenhey)
-
----
-
 ## 🧩 Integration Approach Comparison
 
 | Area                              | **Before: Direct Azure Service Integration**            | **After: Workflow-Driven Azure Connectors (Xenhey)** |
