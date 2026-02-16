@@ -36,11 +36,6 @@ Below is a **clear, executive-ready “Before vs After Xenhey” comparison** yo
 | **API Exposure**       | Implemented late in the cycle                  | Available and testable from day one              |
 | **Client Ownership**   | Passive consumer                               | Active co-creator                                |
 
-
-
-Below is a **detailed, architect-grade comparison chart** that focuses specifically on **connecting to Azure services directly vs. leveraging Azure services through Xenhey workflow-based connectors**.
-This is suitable for **enterprise decks, PRDs, GitHub README, or client proposals**.
-
 ---
 
 ## 🧩 Integration Approach Comparison
