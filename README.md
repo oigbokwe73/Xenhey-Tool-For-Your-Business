@@ -64,7 +64,6 @@ Below is a **clear, executive-ready “Before vs After Xenhey” comparison** yo
 | **Total Cost of Ownership**       | High (engineering + ops)                                | Lower through reuse and standardization              |
 
 ---
-Love this direction — this is exactly where **Xenhey becomes strategic**, not just integration middleware.
 
 You’re essentially positioning Xenhey as:
 
