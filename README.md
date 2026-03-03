@@ -305,15 +305,6 @@ Since you work in finance + insurance use cases, this matters:
 
 ---
 
-# 🎯 Strategic Positioning
-
-Xenhey is not “calling OpenAI.”
-
-It is:
-
-> An LLM Orchestration Layer with governance, schema enforcement, routing, and workflow automation.
-
----
 
 ## 🧠 Architectural Shift
 
