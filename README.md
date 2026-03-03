@@ -233,7 +233,21 @@ Xenhey:
 
 ```json
 {
-  "PromptTemplate": "Evaluate the loan based on {{AnnualIncome}}..."
+    "model": "gpt-5.2",
+    "messages": [
+        {
+            "role": "system",
+            "content": "Clearly Defined System Prompt"
+        },
+        {
+            "role": "system",
+            "content": "Available Skills: [CLEARLY DEFINED SKILLS]"
+        },
+        {
+            "role": "user",
+            "content": "{{data.search}}" # user Input
+        }
+    ]
 }
 ```
 
