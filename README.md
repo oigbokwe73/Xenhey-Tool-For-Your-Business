@@ -48,7 +48,7 @@ Below is a **clear, executive-ready “Before vs After Xenhey” comparison** yo
 | **Change Impact**                 | Code changes + redeployments                            | Configuration & rule updates only                    |
 | **Onboarding New Azure Services** | Weeks of design, coding, testing                        | Hours or days via connector configuration            |
 | **Consistency Across Services**   | Varies by developer/team                                | Enforced by the runtime                              |
-| **Error Handling**                | Manually implemented per service                        | Standardized retry, DLQ, and compensation            |
+| **Error Handling**                | Manually implemented per service                        | Included in framework at the processor step in workflow|
 | **Security Model**                | Reimplemented per integration                           | Centralized (Managed Identity, x-api-key)            |
 | **Authentication Logic**          | Duplicated across codebases                             | Handled once by the runtime                          |
 | **Environment Drift**             | High risk across dev/test/prod                          | Minimal—config-driven                                |
